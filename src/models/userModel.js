@@ -9,6 +9,22 @@ export const findUserByUsername = async (username) => {
 };
 
 export const findAllUsers = async () => {
-    const [rows] = await connection.query('SELECT * FROM users');
+    const [rows] = await connection.query('SELECT id, username, role FROM users');
     return rows;
+};
+
+export const findUserById = async (id) => {
+    const [rows] = await connection.query(
+        'SELECT id, username, role FROM users WHERE id = ?',
+        [id]
+    );
+    return rows[0];
+};
+
+export const deleteUserById = async (id) => {
+    const [result] = await connection.query(
+        'DELETE FROM users WHERE id = ?',
+        [id]
+    );
+    return result;
 };
