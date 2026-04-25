@@ -28,3 +28,11 @@ export const deleteUserById = async (id) => {
     );
     return result;
 };
+
+export const createUser = async (username, password, role) => {
+    const [result] = await connection.query(
+        'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
+        [username, password, role]
+    );
+    return result;
+};
